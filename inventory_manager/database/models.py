@@ -21,6 +21,7 @@ class Location(CommonModel):
         "models.Location", "children", null=True)
 
     children: ReverseRelation["Location"]
+    items: ReverseRelation["Item"]
 
 
 class Category(CommonModel):
@@ -30,6 +31,7 @@ class Category(CommonModel):
         "models.Category", "children", null=True)
 
     children: ReverseRelation["Category"]
+    items: ReverseRelation["Item"]
 
 
 class Item(CommonModel):
@@ -38,6 +40,6 @@ class Item(CommonModel):
     expires = DateField(null=True)
     quantity = IntField(default=1)
     location: ForeignKeyRelation["Location"] = ForeignKeyField(
-        "models.Location")
+        "models.Location", "items")
     category: ForeignKeyRelation["Category"] = ForeignKeyField(
-        "models.Category")
+        "models.Category", "items")
