@@ -1,0 +1,11 @@
+[Tt]humbs.db
+*.DS_Store
+~$*
+
+.vscode
+data/
+*.sqlite
+.env
+
+__pycache__
+.venv/
