@@ -1,6 +1,7 @@
 from quart import Blueprint, redirect, render_template, request, url_for
 
 from ..database import models
+from ..helpers import empty_to_none
 
 blueprint = Blueprint("manage", __name__, url_prefix="/manage")
 
@@ -37,12 +38,8 @@ async def post_categories_new():
     form = await request.form
 
     name = form["name"].strip().lower()
-    description = form.get("description")
-    if description == "":
-        description = None
-    parent_id = form.get("parent-id")
-    if parent_id == "":
-        parent_id = None
+    description = empty_to_none(form.get("description"))
+    parent_id = empty_to_none(form.get("parent-id"))
 
     category = await models.Category.create(
         name=name,
@@ -80,12 +77,8 @@ async def post_locations_new():
     form = await request.form
 
     name = form["name"].strip().lower()
-    description = form.get("description")
-    if description == "":
-        description = None
-    parent_id = form.get("parent-id")
-    if parent_id == "":
-        parent_id = None
+    description = empty_to_none(form.get("description"))
+    parent_id = empty_to_none(form.get("parent-id"))
 
     location = await models.Location.create(
         name=name,
@@ -118,12 +111,8 @@ async def post_items_new():
     form = await request.form
 
     name = form["name"].strip().lower()
-    description = form.get("description")
-    if description == "":
-        description = None
-    expires = form.get("expiry")
-    if expires == "":
-        expires = None
+    description = empty_to_none(form.get("description"))
+    expires = empty_to_none(form.get("expiry"))
     quantity = form["quantity"]
     category_id = form["category-id"]
     location_id = form["location-id"]
