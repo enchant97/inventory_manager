@@ -1,0 +1,30 @@
+{% extends "/base.jinja" %}
+{% set title="Management - New Category" %}
+{% block main %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('manage.get_index') }}">Back</a></li>
+    </ul>
+</nav>
+
+<form action="{{ url_for('manage.post_categories_new') }}" method="post">
+    <div>
+        <label for="new-category-name">Name</label>
+        <input type="text" name="name" id="new-category-name" required maxlength="64">
+    </div>
+    <div>
+        <label for="new-category-desc">Description</label>
+        <textarea name="description" id="new-category-desc" cols="30" rows="10" maxlength="512"></textarea>
+    </div>
+    <div>
+        <label for="new-category-parent">Parent Category</label>
+        <select name="parent-id" id="new-category-parent">
+            <option value="">** Root **</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit">Create</button>
+</form>
+{% endblock main %}

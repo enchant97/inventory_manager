@@ -1,2 +1,10 @@
 {% extends "/base.jinja" %}
 {% set title="Management" %}
+{% block main %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('root.get_index') }}">Back</a></li>
+        <li><a href="{{ url_for('manage.get_categories_index') }}">Categories</a></li>
+    </ul>
+</nav>
+{% endblock main %}
