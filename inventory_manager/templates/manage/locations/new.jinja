@@ -1,0 +1,30 @@
+{% extends "/base.jinja" %}
+{% set title="Management - New Location" %}
+{% block main %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('manage.get_locations_index') }}">Back</a></li>
+    </ul>
+</nav>
+
+<form action="{{ url_for('manage.post_locations_new') }}" method="post">
+    <div>
+        <label for="new-location-name">Name</label>
+        <input type="text" name="name" id="new-location-name" required maxlength="64">
+    </div>
+    <div>
+        <label for="new-location-desc">Description</label>
+        <textarea name="description" id="new-location-desc" cols="30" rows="10" maxlength="512"></textarea>
+    </div>
+    <div>
+        <label for="new-location-parent">Parent Location</label>
+        <select name="parent-id" id="new-location-parent">
+            <option value="">** Root **</option>
+            {% for location in locations %}
+            <option value="{{ location.id }}">{{ location.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit">Create</button>
+</form>
+{% endblock main %}
