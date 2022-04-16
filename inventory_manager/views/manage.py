@@ -1,4 +1,4 @@
-from quart import Blueprint, render_template, redirect, url_for, request
+from quart import Blueprint, redirect, render_template, request, url_for
 
 from ..database import models
 
@@ -94,3 +94,47 @@ async def post_locations_new():
     )
 
     return redirect(url_for(".get_locations_index"))
+
+
+@blueprint.get("/items/")
+async def get_items_index():
+    return await render_template("manage/items/index.jinja")
+
+
+@blueprint.get("/items/new")
+async def get_items_new():
+    categories = await models.Category.all()
+    locations = await models.Location.all()
+
+    return await render_template(
+        "manage/items/new.jinja",
+        categories=categories,
+        locations=locations,
+    )
+
+
+@blueprint.post("/items/new")
+async def post_items_new():
+    form = await request.form
+
+    name = form["name"].strip().lower()
+    description = form.get("description")
+    if description == "":
+        description = None
+    expires = form.get("expiry")
+    if expires == "":
+        expires = None
+    quantity = form["quantity"]
+    category_id = form["category-id"]
+    location_id = form["location-id"]
+
+    await models.Item.create(
+        name=name,
+        description=description,
+        expires=expires,
+        quantity=quantity,
+        category_id=category_id,
+        location_id=location_id,
+    )
+
+    return redirect(url_for(".get_items_index"))
