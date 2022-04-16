@@ -1,0 +1,59 @@
+{% extends "/base.jinja" %}
+{% set title="View - Items Filtered" %}
+{% block main %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('view.get_items_index') }}">Back</a></li>
+    </ul>
+</nav>
+
+<form action="" method="get">
+    <div>
+        <label for="view-item-name">Name</label>
+        <input type="text" name="name" id="view-item-name" value="{{ filtered_name }}">
+    </div>
+    <div>
+        <label for="view-item-category">Category</label>
+        <select name="category-id" id="view-item-category">
+            <option value="">** Root **</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label for="view-item-location">Location</label>
+        <select name="location-id" id="view-item-location">
+            <option value="">** Root **</option>
+            {% for location in locations %}
+            <option value="{{ location.id }}">{{ location.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit">Search</button>
+</form>
+
+<table>
+    <caption>Items</caption>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            {% if item.description %}
+            <td>{{ item.description | truncate(18, true) }}</td>
+            {% else %}
+            <td>-</td>
+            <td><a href="">View</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock main %}

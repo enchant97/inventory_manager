@@ -20,7 +20,11 @@
         {% for category in category_roots %}
         <tr>
             <td>{{ category.name }}</td>
+            {% if category.description %}
             <td>{{ category.description | truncate(18, true) }}</td>
+            {% else %}
+            <td>-</td>
+            {% endif %}
             <td><a href="{{ url_for('view.get_categories_category', category_id=category.id) }}">View</a></td>
         </tr>
         {% endfor %}

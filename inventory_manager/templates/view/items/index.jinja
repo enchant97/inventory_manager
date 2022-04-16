@@ -1,31 +1,30 @@
 {% extends "/base.jinja" %}
-{% set title="View - Locations" %}
+{% set title="View - Items" %}
 {% block main %}
 <nav>
     <ul>
         <li><a href="{{ url_for('view.get_index') }}">Back</a></li>
+        <li><a href="{{ url_for('view.get_items_filtered') }}">Filtered</a></li>
     </ul>
 </nav>
 
 <table>
-    <caption>Root Locations</caption>
+    <caption>Recently Added</caption>
     <thead>
         <tr>
             <th>Name</th>
             <th>Description</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-        {% for location in location_roots %}
+        {% for item in recently_added %}
         <tr>
-            <td>{{ location.name }}</td>
-            {% if location.description %}
-            <td>{{ location.description | truncate(18, true) }}</td>
+            <td>{{ item.name }}</td>
+            {% if item.description %}
+            <td>{{ item.description | truncate(18, true) }}</td>
             {% else %}
             <td>-</td>
             {% endif %}
-            <td><a href="{{ url_for('view.get_locations_location', location_id=location.id) }}">View</a></td>
         </tr>
         {% endfor %}
     </tbody>

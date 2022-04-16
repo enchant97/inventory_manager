@@ -13,8 +13,8 @@ async def get_index():
 
 @blueprint.get("/categories/")
 async def get_categories_index():
-    roots_count = await models.Category.filter(parent=None).count()
-    total_count = await models.Category.all().count()
+    roots_count = await models.Category.filter(parent=None, removed_at=None).count()
+    total_count = await models.Category.filter(removed_at=None).all().count()
 
     return await render_template(
         "manage/categories/index.jinja",
@@ -25,7 +25,7 @@ async def get_categories_index():
 
 @blueprint.get("/categories/new")
 async def get_categories_new():
-    categories = await models.Category.all()
+    categories = await models.Category.filter(removed_at=None).all()
 
     return await render_template(
         "manage/categories/new.jinja",
@@ -52,8 +52,8 @@ async def post_categories_new():
 
 @blueprint.get("/locations/")
 async def get_locations_index():
-    roots_count = await models.Location.filter(parent=None).count()
-    total_count = await models.Location.all().count()
+    roots_count = await models.Location.filter(parent=None, removed_at=None).count()
+    total_count = await models.Location.filter(removed_at=None).all().count()
 
     return await render_template(
         "manage/locations/index.jinja",
@@ -64,7 +64,7 @@ async def get_locations_index():
 
 @blueprint.get("/locations/new")
 async def get_locations_new():
-    locations = await models.Location.all()
+    locations = await models.Location.filter(removed_at=None).all()
 
     return await render_template(
         "manage/locations/new.jinja",
@@ -96,8 +96,8 @@ async def get_items_index():
 
 @blueprint.get("/items/new")
 async def get_items_new():
-    categories = await models.Category.all()
-    locations = await models.Location.all()
+    categories = await models.Category.filter(removed_at=None).all()
+    locations = await models.Location.filter(removed_at=None).all()
 
     return await render_template(
         "manage/items/new.jinja",
