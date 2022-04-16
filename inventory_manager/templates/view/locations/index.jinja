@@ -1,0 +1,29 @@
+{% extends "/base.jinja" %}
+{% set title="View - Locations" %}
+{% block main %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('view.get_index') }}">Back</a></li>
+    </ul>
+</nav>
+
+<table>
+    <caption>Root Locations</caption>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for location in location_roots %}
+        <tr>
+            <td>{{ location.name }}</td>
+            <td>{{ location.description | truncate(18, true) }}</td>
+            <td><a href="{{ url_for('view.get_locations_location', location_id=location.id) }}">View</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock main %}

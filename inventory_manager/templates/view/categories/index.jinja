@@ -1,0 +1,29 @@
+{% extends "/base.jinja" %}
+{% set title="View - Categories" %}
+{% block main %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('view.get_index') }}">Back</a></li>
+    </ul>
+</nav>
+
+<table>
+    <caption>Root Categories</caption>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in category_roots %}
+        <tr>
+            <td>{{ category.name }}</td>
+            <td>{{ category.description | truncate(18, true) }}</td>
+            <td><a href="{{ url_for('view.get_categories_category', category_id=category.id) }}">View</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock main %}

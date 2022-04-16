@@ -1,2 +1,11 @@
 {% extends "/base.jinja" %}
 {% set title="View" %}
+{% block main %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('view.get_index') }}">Back</a></li>
+        <li><a href="{{ url_for('view.get_categories_index') }}">Categories</a></li>
+        <li><a href="{{ url_for('view.get_locations_index') }}">Locations</a></li>
+    </ul>
+</nav>
+{% endblock main %}

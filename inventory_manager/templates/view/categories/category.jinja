@@ -1,0 +1,65 @@
+{% extends "/base.jinja" %}
+{% set title="View - Category '" + category.name + "'" %}
+{% block main %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('view.get_categories_index') }}">Back</a></li>
+    </ul>
+</nav>
+
+<section>
+    <h3>Attributes</h3>
+    <table>
+        <thead>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Name</th>
+                <td>{{ category.name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Parent</th>
+                {% if category.parent %}
+                <td><a href="{{ url_for('view.get_categories_category', category_id=category.parent.id) }}">{{
+                        category.parent.name }}</a></td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th scope="row">Description</th>
+                {% if category.description %}
+                <td>{{ category.description }}</td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h3>Children</h3>
+    {% if children %}
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+
+        </thead>
+        <tbody>
+            {% for child in children %}
+            <tr>
+                <td>{{ child.name }}</td>
+                <td><a href="{{ url_for('view.get_categories_category', category_id=child.id) }}">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No Children</p>
+    {% endif %}
+</section>
+{% endblock main %}
