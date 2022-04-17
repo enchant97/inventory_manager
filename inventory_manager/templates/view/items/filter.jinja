@@ -57,7 +57,7 @@
                 <td>{{ item.description | truncate(18, true) }}</td>
                 {% else %}
                 <td>-</td>
-                <td><a href="">View</a></td>
+                <td><a href="{{ url_for('view.get_items_item', item_id=item.id) }}">View</a></td>
                 {% endif %}
             </tr>
             {% endfor %}

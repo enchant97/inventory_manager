@@ -1,0 +1,53 @@
+{% extends "/base.jinja" %}
+{% set title="View - Item '" + item.name + "'" %}
+{% block main %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('view.get_items_index') }}">Back</a></li>
+    </ul>
+</nav>
+
+<section>
+    <h3>Attributes</h3>
+    <table>
+        <thead>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Name</th>
+                <td>{{ item.name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Description</th>
+                {% if item.description %}
+                <td>{{ item.description }}</td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th scope="row">Expires</th>
+                {% if item.expires %}
+                <td>{{ item.expires }}</td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th scope="row">Quantity</th>
+                <td>{{ item.quantity }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Category</th>
+                <td><a href="{{ url_for('view.get_categories_category', category_id=item.category_id) }}">{{
+                        item.category.name }}</a></td>
+            </tr>
+            <tr>
+                <th scope="row">Location</th>
+                <td><a href="{{ url_for('view.get_locations_location', location_id=item.location_id) }}">{{
+                        item.location.name }}</a></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+{% endblock main %}

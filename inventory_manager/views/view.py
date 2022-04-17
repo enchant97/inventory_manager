@@ -119,3 +119,13 @@ async def get_items_filtered():
         next_page_args=next_page_args,
         has_next=has_next,
     )
+
+
+@blueprint.get("/items/<int:item_id>")
+async def get_items_item(item_id: int):
+    item = await models.Item.get(id=item_id)
+
+    return await render_template(
+        "view/items/item.jinja",
+        item=item,
+    )
