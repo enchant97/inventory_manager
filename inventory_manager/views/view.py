@@ -1,7 +1,7 @@
-from quart import Blueprint, render_template, request
+from quart import Blueprint, abort, render_template, request
 
 from ..database import models
-from ..helpers import empty_to_none, none_to_empty
+from ..helpers import empty_to_none, none_to_empty, noneable_int
 
 blueprint = Blueprint("view", __name__, url_prefix="/view")
 
@@ -57,7 +57,7 @@ async def get_locations_location(location_id: int):
 
 @blueprint.get("/items/")
 async def get_items_index():
-    recently_added = await models.Item.filter(removed_at=None).all().limit(5)
+    recently_added = await models.Item.filter(removed_at=None).all().limit(5).order_by("-created_at")
 
     return await render_template(
         "view/items/index.jinja",
@@ -72,10 +72,14 @@ async def get_items_filtered():
 
     args = request.args
 
+    row_limit = args.get("row-limit", 10, int)
+    if row_limit > 40 or row_limit <= 0:
+        abort(400)
+    last_id = args.get("last_id")
     name = empty_to_none(args.get("name"))
     category_id = empty_to_none(args.get("category-id"))
     location_id = empty_to_none(args.get("location-id"))
-    removed = args.get("removed", bool, False)
+    removed = args.get("removed", False, bool)
 
     items = models.Item
     filters = {}
@@ -86,8 +90,21 @@ async def get_items_filtered():
         filters["category_id"] = category_id
     if location_id:
         filters["location_id"] = location_id
+    if last_id:
+        filters["id__lt"] = last_id
 
-    items = await items.filter(**filters, removed_at=None).all()
+    items = await items.filter(**filters, removed_at=None).all().limit(row_limit).order_by("-id")
+
+    last_item_id = None
+    has_next = False
+    if len(items) > 0:
+        last_item_id = items[-1].id
+        next_filters = filters.copy()
+        next_filters["id__lt"] = last_item_id
+        if await models.Item.filter(**next_filters, removed_at=None).order_by("-id").first():
+            has_next = True
+    next_page_args = args.to_dict()
+    next_page_args.pop("last_id", None)
 
     return await render_template(
         "view/items/filter.jinja",
@@ -95,6 +112,10 @@ async def get_items_filtered():
         categories=categories,
         items=items,
         filtered_name=none_to_empty(name),
-        filtered_category_id=none_to_empty(category_id),
-        filtered_location_id=none_to_empty(location_id),
+        filtered_category_id=noneable_int(category_id),
+        filtered_location_id=noneable_int(location_id),
+        row_limit=row_limit,
+        last_item_id=last_item_id,
+        next_page_args=next_page_args,
+        has_next=has_next,
     )
