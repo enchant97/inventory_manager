@@ -1,14 +1,14 @@
 {% from "/macros.jinja" import create_row_limit_select %}
 {% extends "/base.jinja" %}
-{% set title="View - Items Filtered" %}
+{% set title="Management - Items Filtered" %}
 {% block main %}
 <nav>
     <ul>
-        <li><a href="{{ url_for('view.get_items_index') }}">Back</a></li>
+        <li><a href="{{ url_for('.get_items_index') }}">Back</a></li>
     </ul>
 </nav>
 
-<form action="{{ url_for('view.get_items_filtered') }}" method="get">
+<form action="{{ url_for('.get_items_filtered') }}" method="get">
     <h3>Filters</h3>
     <div>
         <label for="view-item-name">Name</label>
@@ -35,6 +35,10 @@
     <div>
         {{ create_row_limit_select("view-item-row-limit", "row-limit", selected=row_limit) }}
     </div>
+    <div>
+        <label for="view-item-removed">Show Removed</label>
+        <input type="checkbox" name="removed" id="view-item-removed" value="1" {% if removed %}checked{% endif %}>
+    </div>
     <button type="submit">Search</button>
 </form>
 
@@ -57,7 +61,7 @@
                 <td>{{ item.description | truncate(18, true) }}</td>
                 {% else %}
                 <td>-</td>
-                <td><a href="{{ url_for('view.get_items_item', item_id=item.id) }}">View</a></td>
+                <td><a href="{{ url_for('.get_items_item', item_id=item.id) }}">View</a></td>
                 {% endif %}
             </tr>
             {% endfor %}
@@ -65,7 +69,7 @@
     </table>
     <div>
         {% if last_item_id and has_next %}
-        <a href="{{ url_for('view.get_items_filtered', last_id=last_item_id, **next_page_args) }}">Next</a>
+        <a href="{{ url_for('.get_items_filtered', last_id=last_item_id, **next_page_args) }}">Next</a>
         {% endif %}
     </div>
 </section>

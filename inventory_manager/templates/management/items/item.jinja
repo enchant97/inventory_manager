@@ -1,9 +1,9 @@
 {% extends "/base.jinja" %}
-{% set title="View - Item '" + item.name + "'" %}
+{% set title="Management - Item '" + item.name + "'" %}
 {% block main %}
 <nav>
     <ul>
-        <li><a href="{{ url_for('view.get_items_index') }}">Back</a></li>
+        <li><a href="{{ url_for('.get_items_index') }}">Back</a></li>
     </ul>
 </nav>
 
@@ -39,12 +39,12 @@
             </tr>
             <tr>
                 <th scope="row">Category</th>
-                <td><a href="{{ url_for('view.get_categories_category', category_id=item.category_id) }}">{{
+                <td><a href="{{ url_for('.get_categories_category', category_id=item.category_id) }}">{{
                         item.category.name }}</a></td>
             </tr>
             <tr>
                 <th scope="row">Location</th>
-                <td><a href="{{ url_for('view.get_locations_location', location_id=item.location_id) }}">{{
+                <td><a href="{{ url_for('.get_locations_location', location_id=item.location_id) }}">{{
                         item.location.name }}</a></td>
             </tr>
         </tbody>

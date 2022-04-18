@@ -1,11 +1,28 @@
 {% extends "/base.jinja" %}
-{% set title="View - Locations" %}
+{% set title="Management - Locations" %}
 {% block main %}
 <nav>
     <ul>
-        <li><a href="{{ url_for('view.get_index') }}">Back</a></li>
+        <li><a href="{{ url_for('.get_index') }}">Back</a></li>
+        <li><a href="{{ url_for('.get_locations_new') }}">New Location</a></li>
     </ul>
 </nav>
+
+<table>
+    <caption>Total Counts</caption>
+    <thead>
+        <tr>
+            <th>Roots Count</th>
+            <th>Total Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ roots_count }}</td>
+            <td>{{ total_count }}</td>
+        </tr>
+    </tbody>
+</table>
 
 <table>
     <caption>Root Locations</caption>
@@ -25,7 +42,7 @@
             {% else %}
             <td>-</td>
             {% endif %}
-            <td><a href="{{ url_for('view.get_locations_location', location_id=location.id) }}">View</a></td>
+            <td><a href="{{ url_for('.get_locations_location', location_id=location.id) }}">View</a></td>
         </tr>
         {% endfor %}
     </tbody>

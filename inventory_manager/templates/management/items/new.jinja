@@ -3,11 +3,11 @@
 {% block main %}
 <nav>
     <ul>
-        <li><a href="{{ url_for('manage.get_items_index') }}">Back</a></li>
+        <li><a href="{{ url_for('.get_items_index') }}">Back</a></li>
     </ul>
 </nav>
 
-<form action="{{ url_for('manage.post_items_new') }}" method="post">
+<form action="{{ url_for('.post_items_new') }}" method="post">
     <div>
         <label for="new-item-name">Name</label>
         <input type="text" name="name" id="new-item-name" required maxlength="64">
