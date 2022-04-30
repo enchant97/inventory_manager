@@ -119,6 +119,35 @@ async def get_locations_location(location_id: int):
     )
 
 
+@blueprint.get("/locations/<int:location_id>/edit")
+async def get_locations_location_edit(location_id: int):
+    location = await models.Location.get(id=location_id)
+
+    return await render_template(
+        "management/locations/edit.jinja",
+        location=location,
+    )
+
+
+@blueprint.post("/locations/<int:location_id>/edit")
+async def post_locations_location_edit(location_id: int):
+    location = await models.Location.get(id=location_id)
+
+    form = await request.form
+    location.name = form["name"].strip().lower()
+    location.description = empty_to_none(form.get("description"))
+    await location.save()
+
+    return redirect(url_for(".get_locations_location_edit", location_id=location_id))
+
+
+@blueprint.get("/locations/<int:location_id>/purge")
+async def get_locations_location_purge(location_id: int):
+    await models.Location.filter(id=location_id).delete()
+
+    return redirect(url_for(".get_locations_index"))
+
+
 @blueprint.get("/locations/new")
 async def get_locations_new():
     locations = await models.Location.filter(removed_at=None).all()

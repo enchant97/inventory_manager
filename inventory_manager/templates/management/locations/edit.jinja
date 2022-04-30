@@ -1,0 +1,31 @@
+{% extends "/base.jinja" %}
+{% set title="Management - Edit Location '" + location.name + "'" %}
+{% block main %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('.get_locations_location', location_id=location.id) }}">Back</a></li>
+    </ul>
+</nav>
+
+<section>
+    <h3>Attributes</h3>
+    <form action="{{ url_for('.post_locations_location_edit', location_id=location.id) }}" method="post">
+        <div>
+            <label for="edit-location-name">Name</label>
+            <input type="text" name="name" id="edit-location-name" maxlength="64" value="{{ location.name }}" required>
+        </div>
+        <div>
+            <label for="edit-location-desc">Description</label>
+            <textarea name="description" id="edit-location-desc" cols="30" rows="10" maxlength="512">
+                {%- if location.description -%}{{ location.description }}{%- endif -%}
+            </textarea>
+        </div>
+        <button type="submit">Save</button>
+    </form>
+</section>
+
+<section>
+    <h3>Danger Zone</h3>
+    <a href="{{ url_for('.get_locations_location_purge', location_id=location.id) }}">Purge</a>
+</section>
+{% endblock main %}

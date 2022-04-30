@@ -4,6 +4,7 @@
 <nav>
     <ul>
         <li><a href="{{ url_for('.get_locations_index') }}">Back</a></li>
+        <li><a href="{{ url_for('.get_locations_location_edit', location_id=location.id) }}">Edit</a></li>
     </ul>
 </nav>
 
