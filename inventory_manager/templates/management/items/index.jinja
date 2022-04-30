@@ -15,6 +15,7 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
             {% else %}
             <td>-</td>
             {% endif %}
+            <td><a href="{{ url_for('.get_items_item', item_id=item.id) }}">View</a></td>
         </tr>
         {% endfor %}
     </tbody>
