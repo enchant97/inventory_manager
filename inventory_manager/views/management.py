@@ -37,6 +37,35 @@ async def get_categories_category(category_id: int):
     )
 
 
+@blueprint.get("/categories/<int:category_id>/edit")
+async def get_categories_category_edit(category_id: int):
+    category = await models.Category.get(id=category_id)
+
+    return await render_template(
+        "management/categories/edit.jinja",
+        category=category,
+    )
+
+
+@blueprint.post("/categories/<int:category_id>/edit")
+async def post_categories_category_edit(category_id: int):
+    category = await models.Category.get(id=category_id)
+
+    form = await request.form
+    category.name = form["name"].strip().lower()
+    category.description = empty_to_none(form.get("description"))
+    await category.save()
+
+    return redirect(url_for(".get_categories_category_edit", category_id=category_id))
+
+
+@blueprint.get("/categories/<int:category_id>/purge")
+async def get_categories_category_purge(category_id: int):
+    await models.Category.filter(id=category_id).delete()
+
+    return redirect(url_for(".get_categories_index"))
+
+
 @blueprint.get("/categories/new")
 async def get_categories_new():
     categories = await models.Category.filter(removed_at=None).all()

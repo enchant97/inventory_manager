@@ -4,6 +4,7 @@
 <nav>
     <ul>
         <li><a href="{{ url_for('.get_categories_index') }}">Back</a></li>
+        <li><a href="{{ url_for('.get_categories_category_edit', category_id=category.id) }}">Edit</a></li>
     </ul>
 </nav>
 
