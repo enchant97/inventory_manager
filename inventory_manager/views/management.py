@@ -256,6 +256,43 @@ async def get_items_item(item_id: int):
     )
 
 
+@blueprint.get("/items/<int:item_id>/edit")
+async def get_items_item_edit(item_id: int):
+    item = await models.Item.get(id=item_id)
+    categories = await models.Category.filter(removed_at=None).all()
+    locations = await models.Location.filter(removed_at=None).all()
+
+    return await render_template(
+        "management/items/edit.jinja",
+        item=item,
+        categories=categories,
+        locations=locations,
+    )
+
+
+@blueprint.post("/items/<int:item_id>/edit")
+async def post_items_item_edit(item_id: int):
+    item = await models.Item.get(id=item_id)
+
+    form = await request.form
+    item.name = form["name"].strip().lower()
+    item.description = empty_to_none(form.get("description"))
+    item.expires = empty_to_none(form.get("expiry"))
+    item.quantity = int(form["quantity"])
+    item.category_id = int(form["category-id"])
+    item.location_id = int(form["location-id"])
+    await item.save()
+
+    return redirect(url_for(".get_items_item_edit", item_id=item.id))
+
+
+@blueprint.get("/items/<int:item_id>/purge")
+async def get_items_item_purge(item_id: int):
+    await models.Item.filter(id=item_id).delete()
+
+    return redirect(url_for(".get_items_index", item_id=item_id))
+
+
 @blueprint.get("/items/new")
 async def get_items_new():
     categories = await models.Category.filter(removed_at=None).all()

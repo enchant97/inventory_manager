@@ -1,0 +1,61 @@
+{% extends "/base.jinja" %}
+{% set title="Management - Edit Item '" + item.name + "'" %}
+{% block main %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('.get_items_item', item_id=item.id) }}">Back</a></li>
+    </ul>
+</nav>
+
+<section>
+    <h3>Attributes</h3>
+    <form action="{{ url_for('.post_items_item_edit', item_id=item.id) }}" method="post">
+        <div>
+            <label for="edit-item-name">Name</label>
+            <input type="text" name="name" id="edit-item-name" maxlength="64" value="{{ item.name }}" required>
+        </div>
+        <div>
+            <label for="edit-item-desc">Description</label>
+            <textarea name="description" id="edit-item-desc" cols="30" rows="10" maxlength="512">
+                {%- if item.description -%}{{ item.description }}{%- endif -%}
+            </textarea>
+        </div>
+        <div>
+            <label for="edit-item-expiry">Expiry</label>
+            <input type="date" name="expiry" id="edit-item-expiry" {%- if item.expires -%}value="{{ item.expires }}" {%-
+                endif -%}>
+        </div>
+        <div>
+            <label for="edit-item-quantity">Quantity</label>
+            <input type="number" name="quantity" id="edit-item-quantity" min="1" step="1" value="{{ item.quantity }}"
+                required>
+        </div>
+        <div>
+            <label for="edit-item-category">Category</label>
+            <select name="category-id" id="edit-item-category" required>
+                <option value="">** Select An Option **</option>
+                {% for category in categories %}
+                <option value="{{ category.id }}" {% if category.id==item.category.id %}selected{% endif %}>{{
+                    category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="edit-item-location">Location</label>
+            <select name="location-id" id="edit-item-location" required>
+                <option value="">** Select An Option **</option>
+                {% for location in locations %}
+                <option value="{{ location.id }}" {% if location.id==item.location.id %}selected{% endif %}>{{
+                    location.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">Save</button>
+    </form>
+</section>
+
+<section>
+    <h3>Danger Zone</h3>
+    <a href="{{ url_for('.get_items_item_purge', item_id=item.id) }}">Purge</a>
+</section>
+{% endblock main %}
