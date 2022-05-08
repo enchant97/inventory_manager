@@ -6,34 +6,34 @@
 </nav>
 
 <form action="{{ url_for('.post_items_new') }}" method="post">
-    <div>
-        <label for="new-item-name">Name</label>
-        <input type="text" name="name" id="new-item-name" required maxlength="64">
+    <div class="mb-3">
+        <label class="form-label" for="new-item-name">Name</label>
+        <input class="form-control" type="text" name="name" id="new-item-name" required maxlength="64">
     </div>
-    <div>
-        <label for="new-item-desc">Description</label>
-        <textarea name="description" id="new-item-desc" cols="30" rows="10" maxlength="512"></textarea>
+    <div class="mb-3">
+        <label class="form-label" for="new-item-desc">Description</label>
+        <textarea class="form-control" name="description" id="new-item-desc" cols="30" rows="10" maxlength="512"></textarea>
     </div>
-    <div>
-        <label for="new-item-expiry">Expiry</label>
-        <input type="date" name="expiry" id="new-item-expiry">
+    <div class="mb-3">
+        <label class="form-label" for="new-item-expiry">Expiry</label>
+        <input class="form-control" type="date" name="expiry" id="new-item-expiry">
     </div>
-    <div>
-        <label for="new-item-quantity">Quantity</label>
-        <input type="number" name="quantity" id="new-item-quantity" min="1" step="1" value="1" required>
+    <div class="mb-3">
+        <label class="form-label" for="new-item-quantity">Quantity</label>
+        <input class="form-control" type="number" name="quantity" id="new-item-quantity" min="1" step="1" value="1" required>
     </div>
-    <div>
-        <label for="new-item-category">Category</label>
-        <select name="category-id" id="new-item-category" required>
+    <div class="mb-3">
+        <label class="form-label" for="new-item-category">Category</label>
+        <select class="form-control" name="category-id" id="new-item-category" required>
             <option value="">** Select An Option **</option>
             {% for category in categories %}
             <option value="{{ category.id }}">{{ category.name }}</option>
             {% endfor %}
         </select>
     </div>
-    <div>
-        <label for="new-item-location">Location</label>
-        <select name="location-id" id="new-item-location" required>
+    <div class="mb-3">
+        <label class="form-label" for="new-item-location">Location</label>
+        <select class="form-control" name="location-id" id="new-item-location" required>
             <option value="">** Select An Option **</option>
             {% for location in locations %}
             <option value="{{ location.id }}">{{ location.name }}</option>

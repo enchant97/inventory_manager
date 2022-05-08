@@ -8,29 +8,29 @@
 <section>
     <h3>Attributes</h3>
     <form action="{{ url_for('.post_items_item_edit', item_id=item.id) }}" method="post">
-        <div>
-            <label for="edit-item-name">Name</label>
-            <input type="text" name="name" id="edit-item-name" maxlength="64" value="{{ item.name }}" required>
+        <div class="mb-3">
+            <label class="form-label" for="edit-item-name">Name</label>
+            <input class="form-control" type="text" name="name" id="edit-item-name" maxlength="64" value="{{ item.name }}" required>
         </div>
-        <div>
-            <label for="edit-item-desc">Description</label>
-            <textarea name="description" id="edit-item-desc" cols="30" rows="10" maxlength="512">
+        <div class="mb-3">
+            <label class="form-label" for="edit-item-desc">Description</label>
+            <textarea class="form-control" name="description" id="edit-item-desc" cols="30" rows="10" maxlength="512">
                 {%- if item.description -%}{{ item.description }}{%- endif -%}
             </textarea>
         </div>
-        <div>
-            <label for="edit-item-expiry">Expiry</label>
-            <input type="date" name="expiry" id="edit-item-expiry" {%- if item.expires -%}value="{{ item.expires }}" {%-
+        <div class="mb-3">
+            <label class="form-label" for="edit-item-expiry">Expiry</label>
+            <input class="form-control" type="date" name="expiry" id="edit-item-expiry" {%- if item.expires -%}value="{{ item.expires }}" {%-
                 endif -%}>
         </div>
-        <div>
-            <label for="edit-item-quantity">Quantity</label>
-            <input type="number" name="quantity" id="edit-item-quantity" min="1" step="1" value="{{ item.quantity }}"
+        <div class="mb-3">
+            <label class="form-label" for="edit-item-quantity">Quantity</label>
+            <input class="form-control" type="number" name="quantity" id="edit-item-quantity" min="1" step="1" value="{{ item.quantity }}"
                 required>
         </div>
-        <div>
-            <label for="edit-item-category">Category</label>
-            <select name="category-id" id="edit-item-category" required>
+        <div class="mb-3">
+            <label class="form-label" for="edit-item-category">Category</label>
+            <select class="form-control" name="category-id" id="edit-item-category" required>
                 <option value="">** Select An Option **</option>
                 {% for category in categories %}
                 <option value="{{ category.id }}" {% if category.id==item.category.id %}selected{% endif %}>{{
@@ -38,9 +38,9 @@
                 {% endfor %}
             </select>
         </div>
-        <div>
-            <label for="edit-item-location">Location</label>
-            <select name="location-id" id="edit-item-location" required>
+        <div class="mb-3">
+            <label class="form-label" for="edit-item-location">Location</label>
+            <select class="form-control" name="location-id" id="edit-item-location" required>
                 <option value="">** Select An Option **</option>
                 {% for location in locations %}
                 <option value="{{ location.id }}" {% if location.id==item.location.id %}selected{% endif %}>{{
@@ -54,6 +54,6 @@
 
 <section>
     <h3>Danger Zone</h3>
-    <a href="{{ url_for('.get_items_item_purge', item_id=item.id) }}">Purge</a>
+    <a class="bnt col-danger" href="{{ url_for('.get_items_item_purge', item_id=item.id) }}">Purge</a>
 </section>
 {% endblock main %}

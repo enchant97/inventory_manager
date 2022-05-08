@@ -8,34 +8,34 @@
 
 <form action="{{ url_for('.get_items_filtered') }}" method="get">
     <h3>Filters</h3>
-    <div>
-        <label for="view-item-name">Name</label>
-        <input type="text" name="name" id="view-item-name" value="{{ filtered_name }}">
+    <div class="mb-3">
+        <label class="form-label" for="view-item-name">Name</label>
+        <input class="form-control" type="text" name="name" id="view-item-name" value="{{ filtered_name }}">
     </div>
-    <div>
-        <label for="view-item-category">Category</label>
-        <select name="category-id" id="view-item-category">
+    <div class="mb-3">
+        <label class="form-label" for="view-item-category">Category</label>
+        <select class="form-control" name="category-id" id="view-item-category">
             <option value="">** Root **</option>
             {% for category in categories %}
             <option {% if category.id == filtered_category_id %}selected{% endif %} value="{{ category.id }}">{{ category.name }}</option>
             {% endfor %}
         </select>
     </div>
-    <div>
-        <label for="view-item-location">Location</label>
-        <select name="location-id" id="view-item-location">
+    <div class="mb-3">
+        <label class="form-label" for="view-item-location">Location</label>
+        <select class="form-control" name="location-id" id="view-item-location">
             <option value="">** Root **</option>
             {% for location in locations %}
             <option {% if location.id == filtered_location_id %}selected{% endif %} value="{{ location.id }}">{{ location.name }}</option>
             {% endfor %}
         </select>
     </div>
-    <div>
+    <div class="mb-3">
         {{ create_row_limit_select("view-item-row-limit", "row-limit", selected=row_limit) }}
     </div>
-    <div>
-        <label for="view-item-removed">Show Removed</label>
+    <div class="mb-3">
         <input type="checkbox" name="removed" id="view-item-removed" value="1" {% if removed %}checked{% endif %}>
+        <label class="form-label" for="view-item-removed">Show Removed</label>
     </div>
     <button type="submit" class="bnt">Search</button>
 </form>

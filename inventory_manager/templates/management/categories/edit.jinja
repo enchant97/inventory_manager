@@ -8,13 +8,13 @@
 <section>
     <h3>Attributes</h3>
     <form action="{{ url_for('.post_categories_category_edit', category_id=category.id) }}" method="post">
-        <div>
-            <label for="edit-category-name">Name</label>
-            <input type="text" name="name" id="edit-category-name" maxlength="64" value="{{ category.name }}" required>
+        <div class="mb-3">
+            <label class="form-label" for="edit-category-name">Name</label>
+            <input class="form-control" type="text" name="name" id="edit-category-name" maxlength="64" value="{{ category.name }}" required>
         </div>
-        <div>
-            <label for="edit-category-desc">Description</label>
-            <textarea name="description" id="edit-category-desc" cols="30" rows="10" maxlength="512">
+        <div class="mb-3">
+            <label class="form-label" for="edit-category-desc">Description</label>
+            <textarea class="form-control" name="description" id="edit-category-desc" cols="30" rows="10" maxlength="512">
                 {%- if category.description -%}{{ category.description }}{%- endif -%}
             </textarea>
         </div>
@@ -24,6 +24,6 @@
 
 <section>
     <h3>Danger Zone</h3>
-    <a href="{{ url_for('.get_categories_category_purge', category_id=category.id) }}">Purge</a>
+    <a class="bnt col-danger" href="{{ url_for('.get_categories_category_purge', category_id=category.id) }}">Purge</a>
 </section>
 {% endblock main %}
