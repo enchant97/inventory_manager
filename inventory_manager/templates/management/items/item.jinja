@@ -1,11 +1,9 @@
 {% extends "/base.jinja" %}
 {% set title="Management - Item '" + item.name + "'" %}
 {% block main %}
-<nav>
-    <ul>
-        <li><a href="{{ url_for('.get_items_index') }}">Back</a></li>
-        <li><a href="{{ url_for('.get_items_item_edit', item_id=item.id) }}">Edit</a></li>
-    </ul>
+<nav class="bnt-group">
+    <a href="{{ url_for('.get_items_index') }}">Back</a>
+    <a href="{{ url_for('.get_items_item_edit', item_id=item.id) }}">Edit</a>
 </nav>
 
 <section>

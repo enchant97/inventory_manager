@@ -2,10 +2,8 @@
 {% extends "/base.jinja" %}
 {% set title="Management - Items Filtered" %}
 {% block main %}
-<nav>
-    <ul>
-        <li><a href="{{ url_for('.get_items_index') }}">Back</a></li>
-    </ul>
+<nav class="bnt-group">
+    <a href="{{ url_for('.get_items_index') }}">Back</a>
 </nav>
 
 <form action="{{ url_for('.get_items_filtered') }}" method="get">
@@ -39,7 +37,7 @@
         <label for="view-item-removed">Show Removed</label>
         <input type="checkbox" name="removed" id="view-item-removed" value="1" {% if removed %}checked{% endif %}>
     </div>
-    <button type="submit">Search</button>
+    <button type="submit" class="bnt">Search</button>
 </form>
 
 <section>

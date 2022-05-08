@@ -1,11 +1,9 @@
 {% extends "/base.jinja" %}
 {% set title="Management - Categories" %}
 {% block main %}
-<nav>
-    <ul>
-        <li><a href="{{ url_for('.get_index') }}">Back</a></li>
-        <li><a href="{{ url_for('.get_categories_new') }}">New Category</a></li>
-    </ul>
+<nav class="bnt-group">
+    <a href="{{ url_for('.get_index') }}">Back</a>
+    <a href="{{ url_for('.get_categories_new') }}">New Category</a>
 </nav>
 
 <table>

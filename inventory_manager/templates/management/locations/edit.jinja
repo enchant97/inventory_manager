@@ -1,10 +1,8 @@
 {% extends "/base.jinja" %}
 {% set title="Management - Edit Location '" + location.name + "'" %}
 {% block main %}
-<nav>
-    <ul>
-        <li><a href="{{ url_for('.get_locations_location', location_id=location.id) }}">Back</a></li>
-    </ul>
+<nav class="bnt-group">
+    <a href="{{ url_for('.get_locations_location', location_id=location.id) }}">Back</a>
 </nav>
 
 <section>
@@ -20,7 +18,7 @@
                 {%- if location.description -%}{{ location.description }}{%- endif -%}
             </textarea>
         </div>
-        <button type="submit">Save</button>
+        <button type="submit" class="bnt col-primary">Save</button>
     </form>
 </section>
 

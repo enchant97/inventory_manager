@@ -1,10 +1,8 @@
 {% extends "/base.jinja" %}
 {% set title="Management - New Item" %}
 {% block main %}
-<nav>
-    <ul>
-        <li><a href="{{ url_for('.get_items_index') }}">Back</a></li>
-    </ul>
+<nav class="bnt-group">
+    <a href="{{ url_for('.get_items_index') }}">Back</a>
 </nav>
 
 <form action="{{ url_for('.post_items_new') }}" method="post">
@@ -42,6 +40,6 @@
             {% endfor %}
         </select>
     </div>
-    <button type="submit">Create</button>
+    <button type="submit" class="bnt col-primary">Create</button>
 </form>
 {% endblock main %}

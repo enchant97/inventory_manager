@@ -1,12 +1,10 @@
 {% extends "/base.jinja" %}
 {% set title="Management - Items" %}
 {% block main %}
-<nav>
-    <ul>
-        <li><a href="{{ url_for('.get_index') }}">Back</a></li>
-        <li><a href="{{ url_for('.get_items_new') }}">New Item</a></li>
-        <li><a href="{{ url_for('.get_items_filtered') }}">Filtered</a></li>
-    </ul>
+<nav class="bnt-group">
+    <a href="{{ url_for('.get_index') }}">Back</a>
+    <a href="{{ url_for('.get_items_new') }}">New Item</a>
+    <a href="{{ url_for('.get_items_filtered') }}">Filtered</a>
 </nav>
 
 <table>
