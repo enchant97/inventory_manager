@@ -105,6 +105,12 @@ textarea.form-control {
     color: white;
 }
 
+@media print {
+    :root {
+        --col-bg: white;
+    }
+}
+
 @media (max-width: 700px) {
 
     .group,
