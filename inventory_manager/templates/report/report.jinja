@@ -1,0 +1,37 @@
+{% extends "/base.jinja" %}
+{% set title="Reports - '" + report.name + "'" %}
+{% block main %}
+<nav class="bnt-group">
+    <a href="{{ url_for('.get_index') }}">Back</a>
+</nav>
+
+<table>
+    <thead>
+        <tr>
+            {% for col in requested_cols %}
+            <th>{{ config.COL_NAMES_TO_HUMAN[col] }}</th>
+            {% endfor %}
+            {% if report.show_quick_actions %}
+            <th></th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            {% for col in requested_cols %}
+            {% if item[col] == None %}
+            <td>-</td>
+            {% else %}
+            <td>{{ item[col] }}</td>
+            {% endif %}
+            {% endfor %}
+            {% if report.show_quick_actions %}
+            <td><a href="{{ url_for('management.get_items_item', item_id=item['id']) }}">More</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock main %}

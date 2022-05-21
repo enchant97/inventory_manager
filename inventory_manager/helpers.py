@@ -1,3 +1,12 @@
+COL_NAMES_TO_HUMAN = {
+    "name": "Name",
+    "description": "Description",
+    "expires": "Expires At",
+    "location__name": "Location",
+    "category__name": "Category",
+}
+
+
 def empty_to_none(s: str | None) -> str | None:
     """
     If string is empty returns None

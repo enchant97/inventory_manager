@@ -6,4 +6,21 @@
     <a href="{{ url_for('.get_new') }}">New Report</a>
 </nav>
 
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for report in reports %}
+        <tr>
+            <td>{{ report.name }}</td>
+            <td><a href="{{ url_for('.get_report', report_id=report.id) }}">View</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock main %}

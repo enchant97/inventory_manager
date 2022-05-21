@@ -1,4 +1,5 @@
 from quart import Blueprint, abort, redirect, render_template, request, url_for
+from tortoise import timezone
 
 from ..database import models
 from ..helpers import empty_to_none
@@ -8,7 +9,11 @@ blueprint = Blueprint("report", __name__, url_prefix="/report")
 
 @blueprint.get("/")
 async def get_index():
-    return await render_template("report/index.jinja")
+    reports = await models.ItemReport.filter(removed_at=None).all()
+    return await render_template(
+        "report/index.jinja",
+        reports=reports,
+    )
 
 
 @blueprint.get("/new")
@@ -53,3 +58,44 @@ async def post_new():
     )
 
     return redirect(url_for(".get_index"))
+
+
+@blueprint.get("/<int:report_id>")
+async def get_report(report_id: int):
+    report = await models.ItemReport.get(id=report_id)
+
+    requested_cols = ["id", "name"]
+
+    if report.show_description:
+        requested_cols.append("description")
+    if report.show_expiry:
+        requested_cols.append("expires")
+    if report.show_location:
+        requested_cols.append("location__name")
+    if report.show_category:
+        requested_cols.append("category__name")
+
+    items = models.Item.filter(removed_at=None)
+    if report.filter_expired_only:
+        items = items.filter(expires__ls=timezone.now())
+
+    match report.sort_mode:
+        case models.ReportSortTypes.CREATION:
+            items = items.order_by("created_at")
+        case models.ReportSortTypes.CREATION_DESC:
+            items = items.order_by("-created_at")
+        case models.ReportSortTypes.EXPIRY:
+            items = items.order_by("expires")
+        case models.ReportSortTypes.EXPIRY_DESC:
+            items = items.order_by("-expires")
+
+    items = await items.values(*requested_cols)
+    # remove the id as "humans" should not be looking at that
+    requested_cols.pop(0)
+
+    return await render_template(
+        "report/report.jinja",
+        report=report,
+        items=items,
+        requested_cols=requested_cols,
+        )
