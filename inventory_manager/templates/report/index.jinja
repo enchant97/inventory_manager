@@ -1,0 +1,9 @@
+{% extends "/base.jinja" %}
+{% set title="Reports" %}
+{% block main %}
+<nav class="bnt-group">
+    <a href="{{ url_for('root.get_index') }}">Back</a>
+    <a href="{{ url_for('.get_new') }}">New Report</a>
+</nav>
+
+{% endblock main %}

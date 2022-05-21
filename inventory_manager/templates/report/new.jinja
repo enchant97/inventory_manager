@@ -1,0 +1,73 @@
+{% extends "/base.jinja" %}
+{% set title="Reports - New" %}
+{% block main %}
+<nav class="bnt-group">
+    <a href="{{ url_for('.get_index') }}">Back</a>
+</nav>
+
+<form action="{{ url_for('.post_new') }}" method="post">
+    <section>
+        <h2>Attributes</h2>
+        <div class="mb-3">
+            <label class="form-label" for="new-report-name">Name</label>
+            <input class="form-control" type="text" name="name" id="new-report-name" maxlength="64" required>
+        </div>
+    </section>
+    <section>
+        <h2>Filters</h2>
+        <div class="mb-3">
+            <label class="form-label" for="new-report-category">Category</label>
+            <select class="form-control" name="category" id="new-report-category">
+                <option value="">** Root **</option>
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="new-report-location">Location</label>
+            <select class="form-control" name="location" id="new-report-location">
+                <option value="">** Root **</option>
+                {% for location in locations %}
+                <option value="{{ location.id }}">{{ location.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="new-report-sort-method">Sort Mode</label>
+            <select class="form-control" name="sort-method" id="new-report-sort-method">
+                <option value="">No Sort</option>
+                <option value="creation">Creation Ascending</option>
+                <option value="creation_desc">Creation Descending</option>
+                <option value="expiry">Expiry Ascending</option>
+                <option value="expiry_desc">Expiry Descending</option>
+            </select>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" name="expired-only" id="new-report-expired-only" value="1">
+            <label class="form-label" for="new-report-expired-only">Expired Only</label>
+        </div>
+    </section>
+    <section>
+        <h2>Fields</h2>
+        <div class="form-check">
+            <input type="checkbox" name="show-description" id="new-report-show-description" value="1">
+            <label class="form-label" for="new-report-show-description">Show Description</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" name="show-expiry" id="new-report-show-expiry" value="1">
+            <label class="form-label" for="new-report-show-expiry">Show Expiry</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" name="show-location" id="new-report-show-location" value="1">
+            <label class="form-label" for="new-report-show-location">Show Location</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" name="show-category" id="new-report-show-category" value="1">
+            <label class="form-label" for="new-report-show-category">Show Category</label>
+        </div>
+    </section>
+
+    <button type="submit" class="bnt col-primary">Create</button>
+</form>
+{% endblock main %}
