@@ -18,6 +18,11 @@ body {
     background-color: var(--col-bg);
 }
 
+footer {
+    margin-top: 100px;
+    text-align: center;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
