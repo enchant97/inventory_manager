@@ -1,4 +1,5 @@
-from quart import Blueprint, abort, redirect, render_template, request, url_for
+from quart import (Blueprint, abort, current_app, redirect, render_template,
+                   request, url_for)
 
 from ..database import models
 from ..helpers import empty_to_none, none_to_empty, noneable_int
@@ -192,9 +193,6 @@ async def get_items_filtered():
 
     args = request.args
 
-    row_limit = args.get("row-limit", 10, int)
-    if row_limit > 40 or row_limit <= 0:
-        abort(400)
     last_id = args.get("last_id")
     name = empty_to_none(args.get("name"))
     category_id = empty_to_none(args.get("category-id"))
@@ -217,7 +215,7 @@ async def get_items_filtered():
     else:
         filters["removed_at"] = None
 
-    items = await items.filter(**filters).all().limit(row_limit).order_by("-id")
+    items = await items.filter(**filters).all().limit(current_app.config["ROW_LIMIT"]).order_by("-id")
 
     last_item_id = None
     has_next = False
@@ -238,7 +236,6 @@ async def get_items_filtered():
         filtered_name=none_to_empty(name),
         filtered_category_id=noneable_int(category_id),
         filtered_location_id=noneable_int(location_id),
-        row_limit=row_limit,
         last_item_id=last_item_id,
         next_page_args=next_page_args,
         has_next=has_next,

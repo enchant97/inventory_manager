@@ -1,4 +1,3 @@
-{% from "/macros.jinja" import create_row_limit_select %}
 {% extends "/base.jinja" %}
 {% set title="Management - Items Filtered" %}
 {% block main %}
@@ -30,10 +29,7 @@
             {% endfor %}
         </select>
     </div>
-    <div class="mb-3">
-        {{ create_row_limit_select("view-item-row-limit", "row-limit", selected=row_limit) }}
-    </div>
-    <div class="mb-3">
+    <div class="mb-3 form-check">
         <input type="checkbox" name="removed" id="view-item-removed" value="1" {% if removed %}checked{% endif %}>
         <label class="form-label" for="view-item-removed">Show Removed</label>
     </div>

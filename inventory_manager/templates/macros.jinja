@@ -1,9 +1,0 @@
-{% macro create_row_limit_select(id, name, label="Row Limit", selected=10) %}
-<label class="form-label" for="{{ id }}">{{ label }}</label>
-<select class="form-control" name="{{ name }}" id="{{ id }}">
-    {% for n in range(1, 5) %}
-    {% set result=n*10 %}
-    <option {% if result==selected %}selected{% endif %}>{{ result }}</option>
-    {% endfor %}
-</select>
-{% endmacro %}
