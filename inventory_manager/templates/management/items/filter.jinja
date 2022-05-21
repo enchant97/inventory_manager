@@ -56,14 +56,16 @@
                 {% else %}
                 <td>-</td>
                 {% endif %}
-                <td><a href="{{ url_for('.get_items_item', item_id=item.id) }}">View</a></td>
+                <td class="group jc-end gap-3">
+                    <a class="bnt" href="{{ url_for('.get_items_item', item_id=item.id) }}">View</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <div>
         {% if last_item_id and has_next %}
-        <a href="{{ url_for('.get_items_filtered', last_id=last_item_id, **next_page_args) }}">Next</a>
+        <a class="bnt" href="{{ url_for('.get_items_filtered', last_id=last_item_id, **next_page_args) }}">Next</a>
         {% endif %}
     </div>
 </section>

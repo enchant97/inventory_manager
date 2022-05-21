@@ -40,7 +40,9 @@
             {% else %}
             <td>-</td>
             {% endif %}
-            <td><a href="{{ url_for('.get_categories_category', category_id=category.id) }}">View</a></td>
+            <td class="group jc-end gap-3">
+                <a class="bnt" href="{{ url_for('.get_categories_category', category_id=category.id) }}">View</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

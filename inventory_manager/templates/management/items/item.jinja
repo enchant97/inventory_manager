@@ -38,12 +38,13 @@
             </tr>
             <tr>
                 <th scope="row">Category</th>
-                <td><a href="{{ url_for('.get_categories_category', category_id=item.category_id) }}">{{
+                <td><a class="col-link"
+                        href="{{ url_for('.get_categories_category', category_id=item.category_id) }}">{{
                         item.category.name }}</a></td>
             </tr>
             <tr>
                 <th scope="row">Location</th>
-                <td><a href="{{ url_for('.get_locations_location', location_id=item.location_id) }}">{{
+                <td><a class="col-link" href="{{ url_for('.get_locations_location', location_id=item.location_id) }}">{{
                         item.location.name }}</a></td>
             </tr>
         </tbody>

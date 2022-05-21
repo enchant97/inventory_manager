@@ -40,7 +40,9 @@
             {% else %}
             <td>-</td>
             {% endif %}
-            <td><a href="{{ url_for('.get_locations_location', location_id=location.id) }}">View</a></td>
+            <td class="group jc-end gap-3">
+                <a class="bnt" href="{{ url_for('.get_locations_location', location_id=location.id) }}">View</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

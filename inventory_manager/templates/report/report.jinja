@@ -32,7 +32,9 @@
             {% endif %}
             {% endfor %}
             {% if report.show_quick_actions %}
-            <td><a href="{{ url_for('management.get_items_item', item_id=item['id']) }}">More</a></td>
+            <td class="group jc-end gap-3">
+                <a class="bnt" href="{{ url_for('management.get_items_item', item_id=item['id']) }}">More</a>
+            </td>
             {% endif %}
         </tr>
         {% endfor %}

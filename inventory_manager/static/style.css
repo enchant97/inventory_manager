@@ -125,6 +125,11 @@ a.title-font:hover {
     color: white;
 }
 
+.col-link,
+.col-link:active {
+    color: var(--col-primary);
+}
+
 @media print {
     :root {
         --col-bg: white;

@@ -19,7 +19,7 @@
             <tr>
                 <th scope="row">Parent</th>
                 {% if category.parent %}
-                <td><a href="{{ url_for('.get_categories_category', category_id=category.parent.id) }}">{{
+                <td><a class="col-link" href="{{ url_for('.get_categories_category', category_id=category.parent.id) }}">{{
                         category.parent.name }}</a></td>
                 {% else %}
                 <td>-</td>
@@ -52,7 +52,9 @@
             {% for child in children %}
             <tr>
                 <td>{{ child.name }}</td>
-                <td><a href="{{ url_for('.get_categories_category', category_id=child.id) }}">View</a></td>
+                <td class="group jc-end gap-3">
+                    <a class="bnt" href="{{ url_for('.get_categories_category', category_id=child.id) }}">View</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
