@@ -6,6 +6,9 @@
     --col-danger: #e60e0e;
 
     --br-1: 8px;
+
+    --ff-title: 'Roboto', sans-serif;
+    --ff-main: 'Open Sans', sans-serif;
 }
 
 *,
@@ -16,6 +19,24 @@
 
 body {
     background-color: var(--col-bg);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--ff-title);
+}
+
+body,
+select,
+input,
+textarea,
+button {
+    font-family: var(--ff-main);
+    font-size: 1rem;
 }
 
 footer {
