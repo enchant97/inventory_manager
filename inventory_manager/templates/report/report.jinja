@@ -1,3 +1,4 @@
+{% from "/macros.jinja" import handle_expiry_col_class %}
 {% extends "/base.jinja" %}
 {% set title="Reports - '" + report.name + "'" %}
 {% block main %}
@@ -23,7 +24,11 @@
             {% if item[col] == None %}
             <td>-</td>
             {% else %}
+            {% if col == "expires" %}
+            <td {{ handle_expiry_col_class(item[col], current_date, warning_date) }}>{{ item[col] }}</td>
+            {% else %}
             <td>{{ item[col] }}</td>
+            {% endif %}
             {% endif %}
             {% endfor %}
             {% if report.show_quick_actions %}

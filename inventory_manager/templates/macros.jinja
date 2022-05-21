@@ -1,0 +1,7 @@
+{%- macro handle_expiry_col_class(expires, current_date, warning_date) -%}
+{%- if expires <= current_date  -%}
+class="col-danger"
+{%- elif expires <= warning_date -%}
+class="col-warning"
+{%- endif -%}
+{%- endmacro -%}

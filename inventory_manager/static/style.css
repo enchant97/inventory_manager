@@ -2,6 +2,7 @@
     --col-bg: #f1f1f1;
     --col-secondary: #757575;
     --col-primary: #0e59e6;
+    --col-warning: #e6880e;
     --col-danger: #e60e0e;
 
     --br-1: 8px;
@@ -15,6 +16,15 @@
 
 body {
     background-color: var(--col-bg);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table :is(td, th) {
+    padding: .3rem;
 }
 
 .group {
@@ -37,14 +47,6 @@ body {
     cursor: pointer;
     border: none;
     display: inline-block;
-}
-
-.bnt.col-primary {
-    background-color: var(--col-primary);
-}
-
-.bnt.col-danger {
-    background-color: var(--col-danger);
 }
 
 .bnt-group a:hover,
@@ -88,7 +90,22 @@ textarea.form-control {
     margin-bottom: .3rem;
 }
 
-@media (max-width: 425px) {
+.col-primary {
+    background-color: var(--col-primary);
+    color: white;
+}
+
+.col-warning {
+    background-color: var(--col-warning);
+    color: white;
+}
+
+.col-danger {
+    background-color: var(--col-danger);
+    color: white;
+}
+
+@media (max-width: 700px) {
 
     .group,
     .bnt-group {

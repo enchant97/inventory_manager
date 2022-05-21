@@ -1,5 +1,6 @@
+from datetime import date, timedelta
+
 from quart import Blueprint, abort, redirect, render_template, request, url_for
-from tortoise import timezone
 
 from ..database import models
 from ..helpers import empty_to_none
@@ -65,6 +66,8 @@ async def get_report(report_id: int):
     report = await models.ItemReport.get(id=report_id)
 
     requested_cols = ["id", "name"]
+    current_date = date.today()
+    warning_date = current_date + timedelta(days=6)
 
     if report.show_description:
         requested_cols.append("description")
@@ -77,7 +80,7 @@ async def get_report(report_id: int):
 
     items = models.Item.filter(removed_at=None)
     if report.filter_expired_only:
-        items = items.filter(expires__lt=timezone.now())
+        items = items.filter(expires__lt=current_date)
 
     match report.sort_mode:
         case models.ReportSortTypes.CREATION:
@@ -98,4 +101,6 @@ async def get_report(report_id: int):
         report=report,
         items=items,
         requested_cols=requested_cols,
+        current_date=current_date,
+        warning_date=warning_date,
         )
