@@ -77,7 +77,7 @@ async def get_report(report_id: int):
 
     items = models.Item.filter(removed_at=None)
     if report.filter_expired_only:
-        items = items.filter(expires__ls=timezone.now())
+        items = items.filter(expires__lt=timezone.now())
 
     match report.sort_mode:
         case models.ReportSortTypes.CREATION:
