@@ -37,6 +37,7 @@ async def post_new():
     show_expiry = form.get("show-expiry", False, bool)
     show_location = form.get("show-location", False, bool)
     show_category = form.get("show-category", False, bool)
+    show_quick_actions = form.get("show-quick-actions", False, bool)
 
     await models.ItemReport.create(
         name=name,
@@ -48,6 +49,7 @@ async def post_new():
         show_expiry=show_expiry,
         show_location=show_location,
         show_category=show_category,
+        show_quick_actions=show_quick_actions,
     )
 
     return redirect(url_for(".get_index"))

@@ -67,3 +67,4 @@ class ItemReport(CommonModel):
     show_expiry = BooleanField(default=False)
     show_location = BooleanField(default=False)
     show_category = BooleanField(default=False)
+    show_quick_actions = BooleanField(default=False)
