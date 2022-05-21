@@ -78,6 +78,17 @@ textarea.form-control {
     resize: vertical;
 }
 
+.title-font {
+    color: initial;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a.title-font:hover {
+    text-decoration: underline;
+}
+
 .m-reset {
     margin: 0;
 }

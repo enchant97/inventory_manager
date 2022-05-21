@@ -10,10 +10,10 @@
 <body>
     <header>
         <div class="group a-center">
-            <h1 class="m-reset mr-auto"><a href="{{ url_for('root.get_index') }}">Inventory Manager</a></h1>
+            <a class="mr-auto title-font" href="{{ url_for('root.get_index') }}">Inventory Manager</a>
             {% include "/includes/navbar.jinja" %}
         </div>
-        <h2>{{ title }}</h2>
+        <h1>{{ title }}</h1>
     </header>
     <main>
         {% block main %}{% endblock main %}
