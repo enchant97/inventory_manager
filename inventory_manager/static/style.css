@@ -27,12 +27,21 @@ table :is(td, th) {
     padding: .3rem;
 }
 
+.d-group,
 .group {
     display: flex;
 }
 
 .a-center {
     align-items: center;
+}
+
+.jc-end {
+    justify-content: flex-end;
+}
+
+.gap-3 {
+    gap: .3rem;
 }
 
 .bnt-group a,
@@ -124,7 +133,7 @@ a.title-font:hover {
 
 @media (max-width: 700px) {
 
-    .group,
+    .d-group,
     .bnt-group {
         flex-direction: column;
         width: 100%;

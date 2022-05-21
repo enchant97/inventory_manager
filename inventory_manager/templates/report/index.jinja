@@ -17,7 +17,10 @@
         {% for report in reports %}
         <tr>
             <td>{{ report.name }}</td>
-            <td><a href="{{ url_for('.get_report', report_id=report.id) }}">View</a></td>
+            <td class="group jc-end gap-3">
+                <a class="bnt" href="{{ url_for('.get_report', report_id=report.id) }}">View</a>
+                <a class="bnt col-danger" href="{{ url_for('.get_purge', report_id=report.id) }}">Purge</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

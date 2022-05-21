@@ -104,3 +104,9 @@ async def get_report(report_id: int):
         current_date=current_date,
         warning_date=warning_date,
         )
+
+
+@blueprint.get("/<int:report_id>/purge")
+async def get_purge(report_id: int):
+    await models.ItemReport.filter(id=report_id).delete()
+    return redirect(url_for(".get_index"))
