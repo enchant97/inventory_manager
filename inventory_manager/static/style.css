@@ -79,6 +79,13 @@ table.hover tbody tr:hover {
     color: white;
 }
 
+label.required::after {
+    margin-left: .1rem;
+    content: "*";
+    color: var(--col-danger);
+    font-weight: bold;
+}
+
 .d-group,
 .group {
     display: flex;

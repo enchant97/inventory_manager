@@ -9,7 +9,7 @@
     <h3>Attributes</h3>
     <form action="{{ url_for('.post_items_item_edit', item_id=item.id) }}" method="post">
         <div class="mb-3">
-            <label class="form-label" for="edit-item-name">Name</label>
+            <label class="form-label required" for="edit-item-name">Name</label>
             <input class="form-control" type="text" name="name" id="edit-item-name" maxlength="64"
                 value="{{ item.name }}" required>
         </div>
@@ -25,12 +25,12 @@
                 -%}value="{{ item.expires }}" {%- endif -%}>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="edit-item-quantity">Quantity</label>
+            <label class="form-label required" for="edit-item-quantity">Quantity</label>
             <input class="form-control" type="number" name="quantity" id="edit-item-quantity" min="1" step="1"
                 value="{{ item.quantity }}" required>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="edit-item-category">Category</label>
+            <label class="form-label required" for="edit-item-category">Category</label>
             <select class="form-control" name="category-id" id="edit-item-category" required>
                 <option value="">** Select An Option **</option>
                 {% for category in categories %}
@@ -40,7 +40,7 @@
             </select>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="edit-item-location">Location</label>
+            <label class="form-label required" for="edit-item-location">Location</label>
             <select class="form-control" name="location-id" id="edit-item-location" required>
                 <option value="">** Select An Option **</option>
                 {% for location in locations %}

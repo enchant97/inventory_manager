@@ -7,7 +7,7 @@
 
 <form action="{{ url_for('.post_items_new') }}" method="post">
     <div class="mb-3">
-        <label class="form-label" for="new-item-name">Name</label>
+        <label class="form-label required" for="new-item-name">Name</label>
         <input class="form-control" type="text" name="name" id="new-item-name" required maxlength="64">
     </div>
     <div class="mb-3">
@@ -24,11 +24,11 @@
         </div>
     </div>
     <div class="mb-3">
-        <label class="form-label" for="new-item-quantity">Quantity</label>
+        <label class="form-label required" for="new-item-quantity">Quantity</label>
         <input class="form-control" type="number" name="quantity" id="new-item-quantity" min="1" step="1" value="1" required>
     </div>
     <div class="mb-3">
-        <label class="form-label" for="new-item-category">Category</label>
+        <label class="form-label required" for="new-item-category">Category</label>
         <select class="form-control" name="category-id" id="new-item-category" required>
             <option value="">** Select An Option **</option>
             {% for category in categories %}
@@ -37,7 +37,7 @@
         </select>
     </div>
     <div class="mb-3">
-        <label class="form-label" for="new-item-location">Location</label>
+        <label class="form-label required" for="new-item-location">Location</label>
         <select class="form-control" name="location-id" id="new-item-location" required>
             <option value="">** Select An Option **</option>
             {% for location in locations %}

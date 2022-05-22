@@ -7,7 +7,7 @@
 
 <form action="{{ url_for('.post_categories_new') }}" method="post">
     <div class="mb-3">
-        <label class="form-label" for="new-category-name">Name</label>
+        <label class="form-label required" for="new-category-name">Name</label>
         <input class="form-control" type="text" name="name" id="new-category-name" required maxlength="64">
     </div>
     <div class="mb-3">

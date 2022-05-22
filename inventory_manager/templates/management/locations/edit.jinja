@@ -9,7 +9,7 @@
     <h3>Attributes</h3>
     <form action="{{ url_for('.post_locations_location_edit', location_id=location.id) }}" method="post">
         <div class="mb-3">
-            <label class="form-label" for="edit-location-name">Name</label>
+            <label class="form-label required" for="edit-location-name">Name</label>
             <input class="form-control" type="text" name="name" id="edit-location-name" maxlength="64" value="{{ location.name }}" required>
         </div>
         <div class="mb-3">

@@ -7,7 +7,7 @@
 
 <form action="{{ url_for('.post_locations_new') }}" method="post">
     <div class="mb-3">
-        <label class="form-label" for="new-location-name">Name</label>
+        <label class="form-label required" for="new-location-name">Name</label>
         <input class="form-control" type="text" name="name" id="new-location-name" required maxlength="64">
     </div>
     <div class="mb-3">
