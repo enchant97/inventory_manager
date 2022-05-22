@@ -69,6 +69,7 @@ async def get_report(report_id: int):
     current_date = date.today()
     warning_date = current_date + timedelta(days=6)
 
+    # add optional columns if they are requested
     if report.show_description:
         requested_cols.append("description")
     if report.show_expiry:
@@ -78,10 +79,14 @@ async def get_report(report_id: int):
     if report.show_category:
         requested_cols.append("category__name")
 
+    # exlcude items marked for deletion
     items = models.Item.filter(removed_at=None)
+
+    # show only expired if requested
     if report.filter_expired_only:
         items = items.filter(expires__lt=current_date)
 
+    # select sort mode if requested
     match report.sort_mode:
         case models.ReportSortTypes.CREATION:
             items = items.order_by("created_at")
@@ -92,7 +97,21 @@ async def get_report(report_id: int):
         case models.ReportSortTypes.EXPIRY_DESC:
             items = items.order_by("-expires")
 
+    # filter chosen categories
+    if (category := await report.filter_category) is not None:
+        selected_categories = [category.id]
+        selected_categories.extend([child.id async for child in category.get_all_children()])
+        items = items.filter(category_id__in=selected_categories)
+
+    # filter chosen locations
+    if (location := await report.filter_location) is not None:
+        selected_locations = [location.id]
+        selected_locations.extend([child.id async for child in location.get_all_children()])
+        items = items.filter(location_id__in=selected_locations)
+
+    # get selected columns in rows
     items = await items.values(*requested_cols)
+
     # remove the id as "humans" should not be looking at that
     requested_cols.pop(0)
 

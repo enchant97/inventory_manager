@@ -204,10 +204,6 @@ async def get_items_filtered():
 
     if name:
         filters["name__startswith"] = name
-    if category_id:
-        filters["category_id"] = category_id
-    if location_id:
-        filters["location_id"] = location_id
     if last_id:
         filters["id__lt"] = last_id
     if removed:
@@ -215,7 +211,22 @@ async def get_items_filtered():
     else:
         filters["removed_at"] = None
 
-    items = await items.filter(**filters).all().limit(current_app.config["ROW_LIMIT"]).order_by("-id")
+    items = items.filter(**filters)
+
+    if category_id:
+        category = await models.Category.get(id=category_id)
+        selected_categories = [category_id]
+        selected_categories.extend([child.id async for child in category.get_all_children()])
+        items = items.filter(category_id__in=selected_categories)
+        filters["category_id"] = category_id
+    if location_id:
+        location = await models.Location.get(id=location_id)
+        selected_locations = [location_id]
+        selected_locations.extend([child.id async for child in location.get_all_children()])
+        items = items.filter(location_id__in=selected_locations)
+        filters["location_id"] = location_id
+
+    items = await items.all().limit(current_app.config["ROW_LIMIT"]).order_by("-id")
 
     last_item_id = None
     has_next = False
