@@ -1,5 +1,6 @@
 from quart import (Blueprint, abort, current_app, redirect, render_template,
                    request, url_for)
+from tortoise import timezone
 
 from ..database import models
 from ..helpers import empty_to_none, none_to_empty, noneable_int
@@ -289,6 +290,13 @@ async def post_items_item_edit(item_id: int):
     item.quantity = int(form["quantity"])
     item.category_id = int(form["category-id"])
     item.location_id = int(form["location-id"])
+
+    removed = form.get("removed", False, bool)
+    if removed:
+        item.removed_at = timezone.now()
+    else:
+        item.removed_at = None
+
     await item.save()
 
     return redirect(url_for(".get_items_item_edit", item_id=item.id))

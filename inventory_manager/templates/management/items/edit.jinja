@@ -10,7 +10,8 @@
     <form action="{{ url_for('.post_items_item_edit', item_id=item.id) }}" method="post">
         <div class="mb-3">
             <label class="form-label" for="edit-item-name">Name</label>
-            <input class="form-control" type="text" name="name" id="edit-item-name" maxlength="64" value="{{ item.name }}" required>
+            <input class="form-control" type="text" name="name" id="edit-item-name" maxlength="64"
+                value="{{ item.name }}" required>
         </div>
         <div class="mb-3">
             <label class="form-label" for="edit-item-desc">Description</label>
@@ -20,13 +21,13 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="edit-item-expiry">Expiry</label>
-            <input class="form-control" type="date" name="expiry" id="edit-item-expiry" {%- if item.expires -%}value="{{ item.expires }}" {%-
-                endif -%}>
+            <input class="form-control" type="date" name="expiry" id="edit-item-expiry" {%- if item.expires
+                -%}value="{{ item.expires }}" {%- endif -%}>
         </div>
         <div class="mb-3">
             <label class="form-label" for="edit-item-quantity">Quantity</label>
-            <input class="form-control" type="number" name="quantity" id="edit-item-quantity" min="1" step="1" value="{{ item.quantity }}"
-                required>
+            <input class="form-control" type="number" name="quantity" id="edit-item-quantity" min="1" step="1"
+                value="{{ item.quantity }}" required>
         </div>
         <div class="mb-3">
             <label class="form-label" for="edit-item-category">Category</label>
@@ -47,6 +48,11 @@
                     location.name }}</option>
                 {% endfor %}
             </select>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" name="removed" id="edit-item-removed" value="1" {% if item.removed_at %}checked{%
+                endif %}>
+            <label class="form-label" for="edit-item-removed">Removed</label>
         </div>
         <button type="submit" class="bnt col-primary">Save</button>
     </form>
