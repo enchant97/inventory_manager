@@ -33,7 +33,9 @@
             {% endfor %}
             {% if report.show_quick_actions %}
             <td class="group jc-end gap-3">
-                <a class="bnt" href="{{ url_for('management.get_items_item', item_id=item['id']) }}">More</a>
+                <a class="bnt" href="{{ url_for('management.get_items_item', item_id=item['id']) }}">View</a>
+                <a class="bnt col-danger"
+                    href="{{ url_for('management.get_items_item_purge', item_id=item['id']) }}">Purge</a>
             </td>
             {% endif %}
         </tr>
