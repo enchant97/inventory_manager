@@ -1,7 +1,7 @@
 :root {
     --col-bg: #f1f1f1;
     --col-secondary: #757575;
-    --col-primary: #0e59e6;
+    --col-primary: #007800;
     --col-warning: #e6880e;
     --col-danger: #e60e0e;
 
@@ -107,6 +107,8 @@ table :is(td, th) {
     display: block;
     width: 100%;
     padding: .4rem .3rem;
+    border-radius: var(--br-1);
+    border: 1px solid black;
 }
 
 textarea.form-control {

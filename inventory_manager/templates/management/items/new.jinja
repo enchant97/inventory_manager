@@ -16,7 +16,12 @@
     </div>
     <div class="mb-3">
         <label class="form-label" for="new-item-expiry">Expiry</label>
-        <input class="form-control" type="date" name="expiry" id="new-item-expiry">
+        <div class="group gap-3" aria-label="Expiry Controls">
+            <input class="form-control" type="date" name="expiry" id="new-item-expiry">
+            <button class="bnt" type="button" onclick="incr_date_by_months('new-item-expiry', 1)" title="Increment Month By 1">+1</button>
+            <button class="bnt" type="button" onclick="incr_date_by_months('new-item-expiry', 3)" title="Increment Month By 3">+3</button>
+            <button class="bnt" type="button" onclick="incr_date_by_months('new-item-expiry', 12)" title="Increment Month By 12">+12</button>
+        </div>
     </div>
     <div class="mb-3">
         <label class="form-label" for="new-item-quantity">Quantity</label>
