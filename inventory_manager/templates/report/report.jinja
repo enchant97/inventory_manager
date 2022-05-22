@@ -6,7 +6,7 @@
     <a href="{{ url_for('.get_index') }}">Back</a>
 </nav>
 
-<table>
+<table class="hover header-top">
     <thead>
         <tr>
             {% for col in requested_cols %}
@@ -19,7 +19,7 @@
     </thead>
     <tbody>
         {% for item in items %}
-        <tr>
+        <tr onclick="window.location=`{{ url_for('management.get_items_item', item_id=item['id']) }}`">
             {% for col in requested_cols %}
             {% if item[col] == None %}
             <td>-</td>

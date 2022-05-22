@@ -1,9 +1,11 @@
 :root {
     --col-bg: #f1f1f1;
+    --col-link: #0e59e6;
     --col-secondary: #757575;
     --col-primary: #007800;
     --col-warning: #e6880e;
     --col-danger: #e60e0e;
+    --col-border: #666666;
 
     --br-1: 8px;
 
@@ -47,10 +49,34 @@ footer {
 table {
     width: 100%;
     border-collapse: collapse;
+    text-align: left;
 }
 
 table :is(td, th) {
     padding: .3rem;
+}
+
+table.header-top th {
+    border-bottom: 2px solid black;
+}
+
+table.header-top td,
+table.header-side td {
+    border-bottom: 1px solid var(--col-border);
+}
+
+table.header-side th {
+    border-right: 2px solid black;
+}
+
+table.hover tbody tr {
+    cursor: pointer;
+    transition-duration: 400ms;
+}
+
+table.hover tbody tr:hover {
+    background-color: black;
+    color: white;
 }
 
 .d-group,
@@ -155,7 +181,7 @@ a.title-font:hover {
 
 .col-link,
 .col-link:active {
-    color: var(--col-primary);
+    color: var(--col-link);
 }
 
 @media print {
