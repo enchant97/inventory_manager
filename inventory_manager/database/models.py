@@ -1,6 +1,7 @@
 from enum import Enum
 from typing import AsyncGenerator
 
+from quart import current_app
 from tortoise.fields import (BooleanField, CharEnumField, CharField, DateField,
                              DatetimeField, ForeignKeyField,
                              ForeignKeyNullableRelation, ForeignKeyRelation,
@@ -48,6 +49,8 @@ class Location(CommonModel):
 
             # prevent infinite loop
             if _level >= MAX_RECURSION_LEVEL:
+                current_app.logger.error(
+                    "getting all 'Location' children reached max recursion level")
                 return
 
             async for sub_child in child.get_all_children(_level + 1):
@@ -75,6 +78,8 @@ class Category(CommonModel):
 
             # prevent infinite loop
             if _level >= MAX_RECURSION_LEVEL:
+                current_app.logger.error(
+                    "getting all 'Category' children reached max recursion level")
                 return
 
             async for sub_child in child.get_all_children(_level + 1):
